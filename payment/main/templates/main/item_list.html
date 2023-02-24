@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Товары</title>
+  </head>
+  <body>
+  <table>
+    <thead>
+        <tr>
+          <th>Название</th>
+          <th>Цена</th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in item_list %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price }}</td>
+          <td><a href="/item/{{ item.id }}">Подробнее</a></td>
+          <td><button type="submit" onclick="showAlert({{ item.id }})">Добавить к заказу</button></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <a href="/order/">Товары в заказе</a>
+  <script type="text/javascript">
+    function showAlert(id){
+      fetch('/add_item_to_order/' + id, {method: 'GET'});
+    }
+  </script>
+  </body>
+</html>
